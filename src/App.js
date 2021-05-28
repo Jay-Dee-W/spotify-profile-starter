@@ -4,10 +4,12 @@ import Login from './components/Login'
 import {getTokenFromUrl } from './components/Spotify'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setToken } from './redux/actions/action';
+import { getUserInfo, setToken } from './redux/actions/action';
+import { useSelector } from 'react-redux';
 
 function App() {
   let dispatch = useDispatch();
+  let state = useSelector(state => state)
 
   useEffect(() => {
     const hash = getTokenFromUrl();
@@ -17,6 +19,10 @@ function App() {
     if (userToken) {
       dispatch(setToken(userToken))
     }
+
+    dispatch(getUserInfo(state.token))
+
+
    console.log(userToken)
   // eslint-disable-next-line 
   }, []);
