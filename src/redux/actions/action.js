@@ -1,4 +1,13 @@
 import axios from "axios";
+import { SET_TOKEN } from "./action_types";
+
+export const setToken = (data) => ({
+    type: SET_TOKEN,
+    payload: data
+})
+
+
+
 export const getData = () => {
     return async (dispatch, getState) => {
         const options = {
