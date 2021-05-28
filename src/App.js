@@ -5,7 +5,7 @@ import {getTokenFromUrl } from './components/Spotify'
 import { useEffect, useState } from 'react';
 
 function App() {
-  const [token, setToken] = useState();
+ 
   useEffect(() => {
     const hash = getTokenFromUrl();
    
