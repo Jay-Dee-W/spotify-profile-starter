@@ -2,12 +2,14 @@
 import './App.css';
 import Login from './components/Login'
 import {getTokenFromUrl } from './components/Spotify'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getUserInfo, setToken } from './redux/actions/action';
 import { useSelector } from 'react-redux';
+import Profile from './components/Profile'
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   let dispatch = useDispatch();
   let state = useSelector(state => state)
 
@@ -21,13 +23,18 @@ function App() {
     }
 
     dispatch(getUserInfo(state.token))
-
+    setIsLoggedIn(true)
+    
 
    console.log(userToken)
   // eslint-disable-next-line 
   }, []);
 
-  return <div className="app"><Login /></div>;
+  return (
+    
+     <div className="app">{ isLoggedIn ? <Login /> :  <Profile />}
+    </div>
+  )
   
 }
 
