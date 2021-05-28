@@ -21,6 +21,7 @@ function App() {
     }
 
     dispatch(getUserInfo(state.token))
+   
 
 
    console.log(userToken)

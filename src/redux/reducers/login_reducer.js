@@ -1,9 +1,9 @@
-import { SET_TOKEN } from "../actions/action_types";
+import { LOGIN, SET_TOKEN, SET_USER_DATA } from "../actions/action_types";
 
 let initialState = {
     token: "",
-    clientId: "30f6b103d69d4e178f710947bcd97bb1",
-    clientSecret: ""
+    loggedIn: false,
+    userData: {}
 }
 
 
@@ -12,6 +12,12 @@ export default function login_reducer(state = initialState, action){
     switch(action.types){
         case SET_TOKEN:
         return {...copyState, token: action.payload}
+
+        case LOGIN:
+            return {...copyState, loggedIn: true}
+        case  SET_USER_DATA: 
+            return {...copyState, userData: action.payload}
+
     default:
         return state;
     }
