@@ -1,3 +1,6 @@
 export const LOGIN = "LOGIN"
 export const SET_TOKEN = "SET_TOKEN"
 export const SET_USER_DATA = "SET_USER_DATA"
+
+export const SET_USER_FOLLOWING = "SET_USER_FOLLOWING"
+export const SET_USER_PLAYLIST = "SET_USER_PLAYLIST"

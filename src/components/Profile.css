@@ -1,0 +1,20 @@
+.profile {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.profile img{
+    margin: 5%;
+    border-radius: 50%;
+    height: 10%;
+    width: 10%;
+}
+.stats {
+    display: flex;
+    justify-content: center;
+}
+
+.green {
+    color: green;
+}

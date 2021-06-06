@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN, SET_TOKEN, SET_USER_DATA } from "./action_types";
+import { LOGIN, SET_TOKEN, SET_USER_DATA ,SET_USER_FOLLOWING,SET_USER_PLAYLIST } from "./action_types";
 
 export const setToken = (data) => ({
     type: SET_TOKEN,
@@ -18,6 +18,17 @@ export const setUserData = (data) => ({
 
 })
 
+export const setUserFollowing = (data) => ({
+    type: SET_USER_FOLLOWING,
+    payload: data
+
+})
+
+export const setUserPlaylist = (data) => ({
+    type: SET_USER_PLAYLIST,
+    payload: data
+
+})
 export const getData = () => {
     return async (dispatch, getState) => {
         const options = {
@@ -33,7 +44,7 @@ export const getData = () => {
         axios.request(options).then(function (response) {
             
             dispatch(setUserData(response.data))
-            console.log(response.data);
+           
         }).catch(function (error) {
             console.error(error);
         });
@@ -43,7 +54,9 @@ export const getData = () => {
 }
 
 
+
 export const getUserInfo =  (token) => {
+    // console.log(token)
     return async (dispatch, getState) => {
         const options = {
             method: 'GET',
@@ -51,15 +64,63 @@ export const getUserInfo =  (token) => {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer BQD2Sk_WNAGq4nxCx0D7MhLhcpVi-wRPUqnCYvMQbmy4Fj23RqHbUzkldgeMlfnIvJ5ArpCgKDYlG_VejErleYHde6NfggOuaJEIHnohUHZz1e8LCA7YDw8lrAld-cS9Dn27UPQrQDWiVtuXxdOpz71Mp2WdQeNi_BM4MBVVtnSbFenM'
+                Authorization: `Bearer ${token} `
             }
         };
-
+        // console.log(options)
         axios.request(options).then(function (response) {
-            console.log(response.data);
+          
+            dispatch(setUserData(response))
         }).catch(function (error) {
             console.error(error);
         });
+
+    }
+}
+
+export const getUserFollowing =  (token) => {
+    // console.log(token)
+    return async (dispatch, getState) => {
+        const options = {
+            method: 'GET',
+            url: 'https://api.spotify.com/v1/me/following',
+            type:'artist',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token} `
+            }
+        };
+        console.log(options)
+        axios.request(options).then(function (response) {
+          
+            dispatch(setUserFollowing(response))
+        }).catch(function (error) {
+            console.error(error);
+        });
+
+    }
+}
+
+export const getUserPlaylist =  (token, userId) => {
+    console.log(token, userId)
+    return async (dispatch, getState) => {
+        const options = {
+            method: 'GET',
+            url: `https://api.spotify.com/v1/users/${userId}/playlists`,
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token} `
+            }
+        };
+        console.log(options)
+        // axios.request(options).then(function (response) {
+          
+        //     dispatch(setUserPlaylist(response))
+        // }).catch(function (error) {
+        //     console.error(error);
+        // });
 
     }
 }
